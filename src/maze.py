@@ -68,7 +68,6 @@ class Maze:
 
         while True:
             toVisit = []
-            print(f"i: {i}, j: {j}")
             if i > 0 and not self._cells[i - 1][j].visited:
                 toVisit.append((i - 1, j))
 
@@ -82,30 +81,24 @@ class Maze:
                 toVisit.append((i, j + 1))
 
             if len(toVisit) == 0:
-                if i == 0 and self._cells[i][j].hasLeftWall:
-                    print("ERROR CANT REMOVE BOUNDRIES OF A MAZE")
                 self._draw_cell(i, j)
                 return
 
             idx = random.randrange(len(toVisit))
             direction = toVisit[idx]
             if direction[0] == i - 1:
-                print("erasing top wall")
                 self._cells[direction[0]][direction[1]].hasRightWall = False
                 self._cells[i][j].hasLeftWall = False
 
             if direction[0] == i + 1:
-                print("erasing bottom wall")
                 self._cells[direction[0]][direction[1]].hasLeftWall = False
                 self._cells[i][j].hasRightWall = False
 
             if direction[1] == j - 1:
-                print("erasing left wall")
                 self._cells[direction[0]][direction[1]].hasBottomWall = False
                 self._cells[i][j].hasTopWall = False
 
             if direction[1] == j + 1:
-                print("erasing right wall")
                 self._cells[direction[0]][direction[1]].hasTopWall = False
                 self._cells[i][j].hasBottomWall = False
 
